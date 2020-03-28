@@ -1,0 +1,65 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.1.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+}
+
+group = 'br.com.estudo'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+compileJava {
+	options.compilerArgs = [
+			'-parameters',
+			'-Amapstruct.defaultComponentModel=spring'
+	]
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-amqp'
+	compile group: 'io.vavr', name: 'vavr', version: '0.10.2'
+	//implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	annotationProcessor group: 'org.mapstruct', name: 'mapstruct-processor', version: '1.3.1.Final'
+	compile group: 'org.mapstruct', name: 'mapstruct-jdk8', version: '1.3.1.Final'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'com.fasterxml.jackson.core:jackson-core:2.9.8'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.8'
+	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.9.8'
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+	implementation group: 'com.rabbitmq', name: 'http-client', version: '3.0.0.RELEASE'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	//implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation 'io.projectreactor:reactor-test'
+	testCompile group: 'junit', name: 'junit', version: '4.13'
+
+	implementation 'junit:junit:4.12'
+	implementation 'junit:junit:4.12'
+}
+
+test {
+	useJUnitPlatform()
+}

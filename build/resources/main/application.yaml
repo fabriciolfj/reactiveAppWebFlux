@@ -1,0 +1,22 @@
+server:
+  port: 8080
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/spring_boot
+  #rabbitmq:
+    #addresses: 'localhost'
+    #port: 5672
+    #username: 'card-account-authorizer'
+    #password: 'card-account-authorizer'
+    #virtual-host: '/card-account-authorizer'
+  thymeleaf:
+    reactive:
+      max-chunk-size: 1024
+      chunked-mode-view-names: listar-chunked #somente essa pagina vai ser executada em bloco, usando o chunk
+
+config:
+  uploads:
+    path: /home/fabricio/Documentos/repositorios/estudo/reactive-app/
+  base:
+    endpoint: /api/v2/products

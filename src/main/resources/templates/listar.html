@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Title</title>
+</head>
+<body>
+    <div th:if="${param.error != null}" th:text="${param.error}"></div>
+    <div th:if="${param.success != null}" th:text="${param.success}"></div>
+    <h1 th:text="${titulo}"></h1>
+    <a th:href="@{/form}">Criar +</a>
+    <table>
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>nome</th>
+            <th>preco</th>
+            <th>categoria</th>
+            <th>data criação</th>
+            <th>Editar</th>
+            <th>Excluir</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product: ${products}">
+            <td> <a th:href="@{/ver/} + ${product.id}" th:text="${#strings.abbreviate(product.id, 10)}"></a></td>
+            <td th:text="${product.nome}"></td>
+            <td th:text="${#numbers.formatCurrency(product.preco)}"></td>
+            <td th:text="${product.category.nome}"></td>
+            <td th:text="${#calendars.format(product.createAt, 'dd/MM/yyyy')}"></td>
+            <td><a th:href="@{/form-v2/} + ${product.id}">Editar</a></td>
+            <td><a th:href="@{/eliminar/} + ${product.id}" onclick="return confirm('Certeza que gostaria de excluir o produto?')">Excluir</a></td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>
