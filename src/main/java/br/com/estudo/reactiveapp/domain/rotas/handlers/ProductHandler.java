@@ -88,7 +88,7 @@ public class ProductHandler {
                 .switchIfEmpty(notFound().build());
     }
 
-    public Mono<ServerResponse> create(ServerRequest request) {
+    public Mono<ServerResponse> create(final ServerRequest request) {
         Mono<Product> product = request.bodyToMono(Product.class);
 
         return product.flatMap(p -> {
